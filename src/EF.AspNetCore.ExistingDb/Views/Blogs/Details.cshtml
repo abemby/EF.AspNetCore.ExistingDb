@@ -1,0 +1,66 @@
+﻿@model EF.AspNetCore.ExistingDb.Models.Blog
+
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Blog Details";
+}
+
+
+<h2>
+    @ViewData["Title"]
+</h2>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BlogId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BlogId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Url)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Url)
+        </dd>
+    </dl>
+</div>
+
+@if (Model.Post.Count() > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Post Id</th>
+                <th>Title</th>
+                <th>Contents</th>
+            </tr>            
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Post)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(mi => item.PostId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(mi => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayTextFor(mi => item.Content)
+                    </td>
+                  </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<div>
+    <a asp-action="Edit" asp-route-blogId ="@Model.BlogId">Edit</a> |
+    <a asp-controller="Posts" asp-action="Index" asp-route-blogId="@Model.BlogId" asp-route-blogUrl="@Model.Url">Posts</a> |
+    <a asp-action="Index">Back to list</a>
+</div>
+

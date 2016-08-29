@@ -1,0 +1,61 @@
+﻿@model IEnumerable<EF.AspNetCore.ExistingDb.Models.Post>
+
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@{
+    ViewBag.Title = "Posts";
+}
+
+<h2>
+    @ViewData["Title"] for <   Url: @ViewData["BlogUrl"] - Id: @ViewData["BlogId"]    >
+</h2>
+
+<p>
+    <a asp-controller="Posts" asp-action="Create" asp-route-blogId="@ViewData["BlogId"]" asp-route-blogUrl="@ViewData["BlogUrl"]">Create New</a>
+</p>
+
+<table class="table">
+    <thead>        
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PostId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Content)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(mi => item.PostId)
+                </td>
+                <td>
+                    @Html.DisplayFor(mi => item.Title)
+
+                </td>
+                <td>
+                    @Html.DisplayTextFor(mi => item.Content)
+
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-postId="@item.PostId" asp-route-blogId="@ViewData["BlogId"]" asp-route-blogUrl="@ViewData["BlogUrl"]">Edit</a> |
+                    <a asp-action="Details" asp-route-postId="@item.PostId" asp-route-blogId="@ViewData["BlogId"]" asp-route-blogUrl="@ViewData["BlogUrl"]">Details</a> |
+                    <a asp-action="Delete" asp-route-postId="@item.PostId" asp-route-blogId="@ViewData["BlogId"]" asp-route-blogUrl="@ViewData["BlogUrl"]">Delete</a> |
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <a asp-controller="Blogs"  asp-action="Index">Back to List</a>
+</div>
